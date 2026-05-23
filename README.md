@@ -1,2 +1,3 @@
 ## Есть многое на свете, друг Горацио, что запретят в Российской Федерации...
 
+![Bitcoin Donate](https://img.shields.io/badge/Bitcoin-ff9b23?style=for-the-badge&logo=bitcoin&logoColor=white&label=Donate&labelColor=000000&color=ff9b23&link=bitcoin:bc1qj0c8wa3gpemtfr3g05sqkqs63xsreky8yf0z72)
