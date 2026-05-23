@@ -8,3 +8,6 @@
 [![Donate XRP](https://img.shields.io/badge/Donate-Ripple-232323?style=for-the-badge&logo=ripple&logoColor=white)](https://xrpscan.com/account/rno5DWfan18Y8B9P8ZhCmEBwmWyCquToqe)
 [![Donate TRX](https://img.shields.io/badge/Donate-Tron-FF0015?style=for-the-badge&logo=tron&logoColor=white)](https://tronscan.org/#/address/TNDqJw31zdRFWsYK5zApHGDDfeARVmMUBY)
 [![Donate with Litecoin](https://img.shields.io/badge/Donate-Litecoin-A6A9AA?style=for-the-badge&logo=litecoin&logoColor=white)](https://litecoinspace.org/address/ltc1qlg0hjpfzrupzsxj0vc4lgakhare32vpdqtjku7)
+
+### Создаю софты с простыми GUI для домохозяек. Лёгкий доступ для каждого.
+
