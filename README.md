@@ -1,4 +1,5 @@
-## Hi there 👋
+## Есть многое на свете, друг Горацио, 
+## что запретят в Российской Федерации...
 
 <!--
 **ComradeBingo/ComradeBingo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
