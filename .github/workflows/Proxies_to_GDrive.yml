@@ -1,0 +1,72 @@
+name: Update Combined Proxy List on Google Drive
+
+on:
+  schedule:
+    # Запуск дважды в день: в 11:00 и 23:00 UTC
+    - cron: '0 11,23 * * *'
+  # Возможность запуска вручную из интерфейса GitHub
+  workflow_dispatch:
+
+jobs:
+  update-proxies:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Скачиваем все 5 файлов из источников
+      - name: Download proxy lists
+        run: |
+          echo "=== Скачиваем файлы ==="
+          wget -O proxy_eu.txt "https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_eu.txt"
+          wget -O proxy_ru.txt "https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_ru.txt"
+          wget -O surfboard.txt "https://raw.githubusercontent.com/Surfboardv2ray/TGProto/refs/heads/main/proxies-tested.txt"
+          wget -O solispirit.txt "https://raw.githubusercontent.com/SoliSpirit/mtproto/master/all_proxies.txt"
+          wget -O therealwh.txt "https://raw.githubusercontent.com/Therealwh/MTPproxyLIST/refs/heads/main/verified/proxy_all_verified.txt"
+          
+          echo "=== Файлы скачаны, размеры ==="
+          ls -lh *.txt
+
+      # 2. Объединяем все файлы в один с заголовками
+      - name: Combine all proxy files
+        run: |
+          echo "=== Объединяем файлы ==="
+          echo "# Combined Proxy List" > combined_proxies.txt
+          echo "# Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> combined_proxies.txt
+          echo "# Sources:" >> combined_proxies.txt
+          echo "#   - proxy_eu.txt (ЕВРОПА)" >> combined_proxies.txt
+          echo "#   - proxy_ru.txt (РОССИЯ)" >> combined_proxies.txt
+          echo "#   - surfboard.txt (SurfboardV2ray)" >> combined_proxies.txt
+          echo "#   - solispirit.txt (SoliSpirit)" >> combined_proxies.txt
+          echo "#   - therealwh.txt (Therealwh)" >> combined_proxies.txt
+          echo "" >> combined_proxies.txt
+          
+          echo "--- proxy_eu.txt (ЕВРОПА) ---" >> combined_proxies.txt
+          cat proxy_eu.txt >> combined_proxies.txt
+          echo "" >> combined_proxies.txt
+          
+          echo "--- proxy_ru.txt (РОССИЯ) ---" >> combined_proxies.txt
+          cat proxy_ru.txt >> combined_proxies.txt
+          echo "" >> combined_proxies.txt
+          
+          echo "--- surfboard.txt (SurfboardV2ray) ---" >> combined_proxies.txt
+          cat surfboard.txt >> combined_proxies.txt
+          echo "" >> combined_proxies.txt
+          
+          echo "--- solispirit.txt (SoliSpirit) ---" >> combined_proxies.txt
+          cat solispirit.txt >> combined_proxies.txt
+          echo "" >> combined_proxies.txt
+          
+          echo "--- therealwh.txt (Therealwh) ---" >> combined_proxies.txt
+          cat therealwh.txt >> combined_proxies.txt
+          
+          echo "=== Объединение завершено ==="
+          wc -l combined_proxies.txt
+
+      # 3. Загружаем объединенный файл на Google Диск с обновлением существующего
+      - name: Upload to Google Drive
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.3.5
+        with:
+          target: "combined_proxies.txt"
+          credentials: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
+          parent_folder_id: ${{ secrets.GDRIVE_FOLDER_ID }}
+          # Обновляет содержимое существующего файла, сохраняя его ID
+          replace_mode: "update_in_place"
