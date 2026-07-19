@@ -70,4 +70,4 @@ jobs:
           credentials: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
           parent_folder_id: ${{ secrets.GDRIVE_FOLDER_ID }}
           # Важно: перезаписываем существующий файл, а не создаем новый
-          overwrite: true
+          replace_mode: true
